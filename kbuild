@@ -1,0 +1,12 @@
+export ARM64GC=/home/ubuntu/AndroidSDK/ndk/22.0.7026061/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin
+export ARM32GCC=/home/Ubuntu/AndroidSDK/ndk/22.0.7026061/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/
+export CLANG BUILD=/home/ubuntu/AndroidSDK/ndk/22.0.7026061/toolchains/llvm/prebuilt/linux-x86_64/bin/
+export KMAKE=/home/ubuntu/AndroidSDK/ndk/22.0.7026061/prebuilt/linux-x86_64/bin/make
+
+$KMAKE O=out ARCH=arm64 test_defconfig
+
+PATH="$CLANGKBUILD:$ARM64GC:$ARM32GCC:${PATH}" \
+$KMAKE -j$(nproc --all) O=out \
+ARCH=arm64 \
+CC=clang \
+CLANG_TRIPLE=aarch64-linux-gnu- \ CROSS_COMPILE=aarch64-linux-android- \ CROSS_COMPILE_ARM32=arm-linux-androideabi- 
